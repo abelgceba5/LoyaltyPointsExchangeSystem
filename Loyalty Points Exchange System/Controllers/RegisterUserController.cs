@@ -17,6 +17,8 @@ namespace Loyalty_Points_Exchange_System.Controllers
         public RegisterUserController(IRegisterUser registerUserProvider)
         {
             _registerUserProvider = registerUserProvider;
+
+            //test
         }
 
         [HttpPost]
@@ -38,6 +40,20 @@ namespace Loyalty_Points_Exchange_System.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred while registering user: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            try
+            {
+                var users = await _registerUserProvider.GetAllUsersAsync();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }

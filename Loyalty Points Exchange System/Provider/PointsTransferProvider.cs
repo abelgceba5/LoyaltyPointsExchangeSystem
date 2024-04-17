@@ -1,4 +1,5 @@
 ﻿using Loyalty_Points_Exchange_System.Interface;
+using Loyalty_Points_Exchange_System.Models;
 using LoyaltyPointsExchangeSystem.AppDbContext;
 using LoyaltyPointsExchangeSystem.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +10,12 @@ namespace LoyaltyPointsExchangeSystem.Provider
     {
 
         private readonly DBContext _dBContext;
-        public PointsTransferProvider(DBContext dbContext)
+        private readonly ITransactionHistory _transactionHistory;
+        public PointsTransferProvider(DBContext dbContext, ITransactionHistory transactionHistory)
         {
 
             _dBContext = dbContext;
+            _transactionHistory = transactionHistory;
         }
 
 
@@ -54,7 +57,8 @@ namespace LoyaltyPointsExchangeSystem.Provider
                       .OrderBy(ep => ep.EarnedDate)
                       .ToList();
 
-                
+                // Record the transaction in the transaction history
+                await _transactionHistory.RecordTransactionAsync(userId, TransactionType.TransferToBank, pointsToTransfer, 0, DateTime.Now);
 
                 foreach (var point in pointsToRemove)
                 {

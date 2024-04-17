@@ -2,6 +2,7 @@
 using LoyaltyPointsExchangeSystem.AppDbContext;
 using Loyalty_Points_Exchange_System.Models;
 using Microsoft.EntityFrameworkCore;
+using Loyalty_Points_Exchange_System.Interface;
 
 namespace LoyaltyPointsExchangeSystem.Provider
 {
@@ -9,10 +10,12 @@ namespace LoyaltyPointsExchangeSystem.Provider
     {
 
         private readonly DBContext _dBContext;
+        private readonly ITransactionHistory _transactionHistory;
 
-        public PointsTransferToUserProvider(DBContext dBContext)
+        public PointsTransferToUserProvider(DBContext dBContext, ITransactionHistory transactionHistory)
         {
             _dBContext = dBContext;
+            _transactionHistory = transactionHistory;
         }
 
 
@@ -67,6 +70,9 @@ namespace LoyaltyPointsExchangeSystem.Provider
 
                 // Save changes to the database
               await _dBContext.SaveChangesAsync();
+
+                await _transactionHistory.RecordTransactionAsync(fromUserId, TransactionType.TransferToUser, -originalPointsToTransfer, 0, DateTime.Now);
+                await _transactionHistory.RecordTransactionAsync(toUserId, TransactionType.TransferToUser, originalPointsToTransfer, 0, DateTime.Now);
 
                 // Create a transfer record
                 var transferRecord = new TransferToUser

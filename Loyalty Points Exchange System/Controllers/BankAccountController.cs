@@ -34,5 +34,21 @@ namespace LoyaltyPointsExchangeSystem.Controllers
                 return BadRequest($"Failed to create bank account: {ex.Message}");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllBankAccounts()
+        {
+            try
+            {
+                // Call the method to retrieve all bank accounts
+                var bankAccounts = await _bankAccountProvider.GetAllBankAccountsAsync();
+                return Ok(bankAccounts);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }

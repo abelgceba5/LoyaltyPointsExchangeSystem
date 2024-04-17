@@ -21,6 +21,21 @@ namespace LoyaltyPointsExchangeSystem.Provider
             _transactionHistory = transactionHistory;
         }
 
+        public async Task<IEnumerable<BankAccount>> GetAllBankAccountsAsync()
+        {
+            try
+            {
+                // Retrieve all bank accounts from the database
+                var bankAccounts = await _dBContext.BankAccounts.ToListAsync();
+                return bankAccounts;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions
+                Console.WriteLine($"Error retrieving bank accounts: {ex.Message}");
+                throw;
+            }
+        }
 
         public async Task<BankAccount> CreateBankAccountAsync(int userId, decimal initialBalance)
         {

@@ -1,4 +1,5 @@
-﻿using Loyalty_Points_Exchange_System.Models;
+﻿using Loyalty_Points_Exchange_System.Interface;
+using Loyalty_Points_Exchange_System.Models;
 using LoyaltyPointsExchangeSystem.AppDbContext;
 using LoyaltyPointsExchangeystem.Interface;
 using Microsoft.EntityFrameworkCore;
@@ -10,12 +11,12 @@ namespace LoyaltyPointsExchangeSystem.Provider
     {
 
         private readonly DBContext _dBContext;
-        public ItemProvider(DBContext dbContext)
+        private readonly ITransactionHistory _transactionHistory;
+        public ItemProvider(DBContext dbContext, ITransactionHistory transactionHistory)
         {
 
             _dBContext = dbContext;
-
-
+            _transactionHistory = transactionHistory;
         }
 
         public async Task<IEnumerable<Item>> GetAllItemsAsync()
@@ -85,6 +86,8 @@ namespace LoyaltyPointsExchangeSystem.Provider
             int pointsEarned = CalculatePointsEarned(amount); // Implement this method
             await EarnPointsAsync(userId, itemId, pointsEarned);
 
+            // Record the transaction in the transaction history
+            await _transactionHistory.RecordTransactionAsync(userId, TransactionType.PurchaseItem, pointsEarned, amount, DateTime.Now);
             return true;
         }
 

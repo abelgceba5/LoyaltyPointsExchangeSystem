@@ -30,6 +30,11 @@ namespace LoyaltyPointsExchangeSystem.Provider
             _dBContext.SaveChanges();
         }
 
+        public async Task<IEnumerable<RegisterUser>> GetAllUsersAsync()
+        {
+            return await _dBContext.registerUsers.ToListAsync();
+        }
+
         public async Task<RegisterUser> GetRegisteredUserByIdAsync(int userId)
         {
             return await _dBContext.registerUsers.FirstOrDefaultAsync(u => u.RegisterUserId == userId);

@@ -37,36 +37,15 @@ namespace Loyalty_Points_Exchange_System.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        //[HttpPost("{itemId}/purchase")]
-        //public async Task<IActionResult> PurchaseItem(int itemId, int userId, decimal amount)
-        //{
+      
         //    // Retrieve item price
         //    var item = await _item.GetItemByIdAsync(itemId);
-        //    if (item == null)
-        //    {
-        //        return BadRequest("Item not found.");
-        //    }
-
-
-        //    bool isEligible = await _item.UserIsEligibleToPurchaseAsync(userId, item.Price * amount);
-
-        //    if (!isEligible)
-        //    {
-        //        return BadRequest("User is not eligible to purchase the item.");
-        //    }
+       
 
 
         //    bool purchaseResult = await _item.PurchaseItemAsync(itemId, userId, amount);
 
-        //    if (purchaseResult)
-        //    {
-        //        return Ok("Item purchased successfully.");
-        //    }
-        //    else
-        //    {
-        //        return BadRequest("Failed to purchase the item.");
-        //    }
-        //}
+       
 
         [HttpPost("{itemId}/purchase")]
         public async Task<ActionResult> PurchaseItem(int itemId, int userId, decimal amount)
@@ -95,6 +74,11 @@ namespace Loyalty_Points_Exchange_System.Controllers
         {
             
             return (int)(amount / 10);
+        }
+        [HttpGet]
+        public async Task<IEnumerable<Item>> GetAllItemsAsync()
+        {
+            return await _item.GetAllItemsAsync();
         }
 
 

@@ -33,6 +33,7 @@ builder.Services.AddScoped<ITransactionHistory, TransactionHistoryProvider>();
 
 
 
+
 builder.Services.AddCors((setup) =>
 {
     setup.AddPolicy("default", (options) =>

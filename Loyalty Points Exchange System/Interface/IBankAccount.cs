@@ -6,5 +6,6 @@ namespace Loyalty_Points_Exchange_System.Interface
     {
 
         Task<BankAccount> CreateBankAccountAsync(int userId, decimal initialBalance);
+        Task<IEnumerable<BankAccount>> GetAllBankAccountsAsync();
     }
 }

@@ -10,7 +10,8 @@ namespace Loyalty_Points_Exchange_System.Models
         EarnPoints,
         RedeemPoints,
         TransferToBank,
-        TransferToUser
+        TransferToUser,
+        PurchaseItem
     }
     public class TransactionHistory
     {
