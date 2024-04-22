@@ -18,5 +18,6 @@ namespace LoyaltyPointsExchangeystem.Interface
         Task<bool> UserIsEligibleToPurchaseAsync(int userId, decimal itemPrice);
 
         Task EarnPointsAsync(int userId, int itemId, int pointsEarned);
+        
     }
 }

@@ -21,12 +21,33 @@ namespace Loyalty_Points_Exchange_System.Controllers
             //test
         }
 
+        //[HttpPost]
+        //public IActionResult RegisterUser(RegisterUser user)
+        //{
+        //    if (!_registerUserProvider.IsValidRegistration())
+        //    {
+        //        return BadRequest("Invalid registration data");
+        //    }
+
+        //    // Optionally, you can perform additional validation here before saving the user
+        //    // For example: if (!ModelState.IsValid) { return BadRequest(ModelState); }
+
+        //    try
+        //    {
+        //        _registerUserProvider.RegisterUser(user);
+        //        return Ok("User registered successfully");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"An error occurred while registering user: {ex.Message}");
+        //    }
+        //}
         [HttpPost]
         public IActionResult RegisterUser(RegisterUser user)
         {
             if (!_registerUserProvider.IsValidRegistration())
             {
-                return BadRequest("Invalid registration data");
+                return BadRequest(new { Success = false, Error = "Invalid registration data" });
             }
 
             // Optionally, you can perform additional validation here before saving the user
@@ -35,13 +56,14 @@ namespace Loyalty_Points_Exchange_System.Controllers
             try
             {
                 _registerUserProvider.RegisterUser(user);
-                return Ok("User registered successfully");
+                return Ok(new { Success = true, Message = "User registered successfully" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred while registering user: {ex.Message}");
+                return StatusCode(500, new { Success = false, Error = $"An error occurred while registering user: {ex.Message}" });
             }
         }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllUsers()

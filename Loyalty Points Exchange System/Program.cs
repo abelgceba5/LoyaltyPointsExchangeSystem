@@ -30,7 +30,10 @@ builder.Services.AddScoped<IRedeemPoints,RedeemPointsProvider>();
 //builder.Services.AddScoped<ITransactionHistory, TransactionHistoryProvider>();
 
 builder.Services.AddScoped<ITransactionHistory, TransactionHistoryProvider>();
+builder.Services.AddScoped<ILogout , LogoutProvider>();
 
+// Inside ConfigureServices method in Startup.cs
+builder.Services.AddHttpContextAccessor();
 
 
 

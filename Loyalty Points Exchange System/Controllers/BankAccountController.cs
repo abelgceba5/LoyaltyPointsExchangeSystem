@@ -19,7 +19,8 @@ namespace LoyaltyPointsExchangeSystem.Controllers
 
 
 
-        [HttpPost("create")]
+        [HttpPost]
+        [Route("CreateBankAccount/{userId}/{initialBalance}")]
         public async Task<IActionResult> CreateBankAccountAsync(int userId, decimal initialBalance)
         {
             try
