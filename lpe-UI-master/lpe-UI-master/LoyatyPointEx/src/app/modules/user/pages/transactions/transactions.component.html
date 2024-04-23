@@ -1,0 +1,26 @@
+<div class="container">
+    <h2>Transaction History</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User ID</th>
+          <th>Type</th>
+          <th>Points Changed</th>
+          <th>Amount Changed</th>
+          <th>Transaction Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transaction of transactionHistory">
+          <td>{{ transaction.id }}</td>
+          <td>{{ transaction.registerUserId }}</td>
+          <td>{{ transaction.type }}</td>
+          <td>{{ transaction.pointsChanged }}</td>
+          <td>{{ transaction.amountChanged }}</td>
+          <td>{{ transaction.transactionDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

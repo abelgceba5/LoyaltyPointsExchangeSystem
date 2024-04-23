@@ -1,0 +1,27 @@
+<div class="container">
+<form [formGroup]="bankAccountForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="balance">Balance:</label>
+      <input type="number" id="initialBalance" formControlName="initialBalance" [(ngModel)]="initialBalance">
+    </div>
+    <button type="submit"  id="points" formControlName="points" class="form-control">Create Bank Account</button>
+  </form>
+</div>
+  <!--div class="container">
+    <h2>Redeem Points to User</h2>
+    <form [formGroup]="sendtoUserForm" (ngSubmit)="submitForm()" class="mt-4">
+        <div class="mb-3">
+            <label for="sendToUser" class="form-label">Username:</label>
+            <select id="sendToUser" formControlName="sendToUser" class="form-control">
+                <option value="" disabled selected>Select User</option>
+              <option *ngFor="let user of users" [value]="user.username">{{ user.username }}</option>
+            </select>
+          </div>
+      <div class="mb-3">
+        <label for="points" class="form-label">Points:</label>
+        <input type="number" id="points" formControlName="points" class="form-control">
+      </div>
+      <button type="submit" class="btn btn-primary">Redeem Points</button>
+    </form>
+  </div-->
+  

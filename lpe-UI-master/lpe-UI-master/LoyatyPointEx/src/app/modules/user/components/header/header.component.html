@@ -1,0 +1,34 @@
+<nav id="nav-c" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        
+        <a class="navbar-brand" href="#">User</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+            aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+       
+        <div class="spacer"></div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="./purchase">Purchase</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="./bank-account">Bank Account</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="./reedembank">Reedem Points To Bank</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="./reedemuser">Reedem Points To User</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="./transactions">Transactions</a>
+                </li>
+                <li class=" btn-primary nav-item text-white" role="button">
+                    <a class="nav-link text-white" (click)="logout()">logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
