@@ -1,4 +1,4 @@
-<div class="featured-items">
+<!-- <div class="featured-items">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -42,4 +42,24 @@
         </div>
       </div>
     </div>
+  </div> -->
+
+  <div class="container">
+    <h2>Purchase Items</h2>
+    <form [formGroup]="purchaseItemForm" (ngSubmit)="submitForm()" class="mt-4">
+          <div class="mb-3">
+            <label for="purchase" class="form-label">Item purchase:</label>
+            <select id="purchase" formControlName="item" class="form-control" [(ngModel)]="item">
+              <option value="" disabled selected>Select Item purchase</option>
+              <!-- Iterate over the items array and generate options -->
+              <option *ngFor="let item of items" [value]="item.id">{{ item.name }}</option>
+            </select>
+          </div>
+      <div class="mb-3">
+        <label for="points" class="form-label">Amount:</label>
+        <input type="number" id="amount" formControlName="amount" class="form-control" [(ngModel)]="amount">
+      </div>
+      <button type="submit" class="btn btn-primary">Purchase Item</button>
+    </form>
   </div>
+  

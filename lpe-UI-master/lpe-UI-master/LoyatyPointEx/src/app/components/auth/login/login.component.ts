@@ -38,6 +38,32 @@ loginForm!: FormGroup;
   }
 
 
+  // onSubmit(): void {
+  //   if (!this.loginForm.valid) {
+  //     return;
+  //   }
+    
+  //   this.UserData.UserName = this.email;
+  //   this.UserData.Password = this.password;
+  //   this.UserData.UserId = this.userId;
+  //     this.auth.authenticateUsername(this.UserData.UserName, this.UserData.Password).subscribe(
+  //       (result) => {
+  //        // this.UserData.UserId = result.userId;
+  //        sessionStorage.setItem('userId ', result.userId);
+  //         console.log('User ID:', this.UserData.UserId );
+  //         console.log('Login successful');
+  //         alert('Login successful');
+          
+  //         this.router.navigateByUrl('user/purchase');
+
+  //       },
+  //       error => {
+         
+  //         console.error('Login failed:', error);
+  //         alert('Login failed');
+  //       }
+  //     ); 
+  // }
   onSubmit(): void {
     if (!this.loginForm.valid) {
       return;
@@ -45,25 +71,29 @@ loginForm!: FormGroup;
     
     this.UserData.UserName = this.email;
     this.UserData.Password = this.password;
-    this.UserData.UserId = this.userId;
-      this.auth.authenticateUsername(this.UserData.UserName, this.UserData.Password).subscribe(
-        (result) => {
-         // this.UserData.UserId = result.userId;
-         sessionStorage.setItem('userId ', result.userId);
-          console.log('User ID:', this.UserData.UserId );
-          console.log('Login successful');
-          alert('Login successful');
-          
-          this.router.navigateByUrl('user/purchase');
-
-        },
-        error => {
-         
-          console.error('Login failed:', error);
-          alert('Login failed');
-        }
-      ); 
+  
+    // Retrieve userId from sessionStorage
+    this.userId = sessionStorage.getItem('userId');
+    console.log('Retrieved userId from sessionStorage:', this.userId); // Add this line
+  
+    this.auth.authenticateUsername(this.UserData.UserName, this.UserData.Password).subscribe(
+      (result) => {
+        console.log('API response:', result); // Add this line
+        sessionStorage.setItem('userId', result.userId);
+        this.userId = result.userId;
+        console.log('Updated userId:', this.userId);
+        console.log('Login successful');
+        alert('Login successful');
+        
+        this.router.navigateByUrl('user/purchase');
+      },
+      error => {
+        console.error('Login failed:', error);
+        alert('Login failed');
+      }
+    ); 
   }
+  
  
 
   

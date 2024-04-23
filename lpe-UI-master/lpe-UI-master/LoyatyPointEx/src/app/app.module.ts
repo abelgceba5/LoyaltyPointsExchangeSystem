@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BankAccountComponent } from './modules/user/pages/bank-account/bank-account.component';
 import { ReedemToUserComponent } from './modules/user/pages/reedem-to-user/reedem-to-user.component';
 import { ReedemToBankComponent } from './modules/user/pages/reedem-to-bank/reedem-to-bank.component';
+import { PurchaseComponent } from './modules/user/pages/purchase/purchase.component';
 
 
 
@@ -33,7 +34,8 @@ import { ReedemToBankComponent } from './modules/user/pages/reedem-to-bank/reede
     RegisterComponent,
     BankAccountComponent,
     ReedemToUserComponent,
-    ReedemToBankComponent
+    ReedemToBankComponent,
+    PurchaseComponent
   ],
   imports: [
     BrowserModule,

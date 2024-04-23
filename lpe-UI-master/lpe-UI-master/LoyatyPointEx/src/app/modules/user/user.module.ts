@@ -21,7 +21,7 @@ import { PurchaseComponent } from './pages/purchase/purchase.component';
     //ReedemToBankComponent,
     HeaderComponent,
     FooterComponent,
-    PurchaseComponent,
+    //PurchaseComponent,
   ],
   imports: [
     CommonModule,

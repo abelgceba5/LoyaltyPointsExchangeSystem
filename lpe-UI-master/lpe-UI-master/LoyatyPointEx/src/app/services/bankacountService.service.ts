@@ -7,6 +7,8 @@ import { TransactionHistory } from '../models/historytransaction.model';
 import { RegisterUsers } from '../modules/registerusers.model';
 import { TransferToBank } from '../models/tranfertobank.model';
 import { TransferToUser } from '../models/transfertouser.model';
+//import { Item } from '../models/Item';
+import { Item } from 'src/app/models/item.model'
   
 
 @Injectable({
@@ -38,6 +40,12 @@ export class BankAccountService {
 
          return this.http.post<TransferToUser>(`${this.apiUrl}PointsTransferToUser/TransferPointsToUser/${userId}/${userto}/${points}`, {})
       }
+      itemPurchase(itemId:number, userId:number, amount: number) : Observable<Item[]>
+      {
+
+         return this.http.post<Item[]>(`${this.apiUrl}Item/PurchaseIte/${itemId}/${userId}/${amount}`, {});
+      }
+
      getAllBankAccounts(): Observable<BankAccount[]> {
     return this.http.get<BankAccount[]>(`${this.apiUrl}`);
   }
@@ -53,6 +61,11 @@ export class BankAccountService {
 
   getAllUsers(): Observable<RegisterUsers[]> {
     return this.http.get<RegisterUsers[]>(`${this.apiUrl}RegisterUser`);
+
+  }
+  getAllItems(): Observable<Item[]>
+  {
+    return this.http.get<Item[]>(`${this.apiUrl}Item`);
   }
   getAllBankAccount(): Observable<BankAccount[]>
   {
