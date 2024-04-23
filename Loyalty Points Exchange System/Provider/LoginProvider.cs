@@ -22,5 +22,10 @@ namespace Loyalty_Points_Exchange_System.Provider
             var existingUser = _dBContext.registerUsers.FirstOrDefault(u => u.Username == user.Username && u.Password == user.Password);
             return existingUser != null;
         }
+        public int GetUserId(string username)
+        {
+            var user = _dBContext.registerUsers.FirstOrDefault(u => u.Username == username);
+            return user != null ? user.RegisterUserId : -1;
+        }
     }
 }

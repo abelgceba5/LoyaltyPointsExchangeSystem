@@ -9,7 +9,9 @@ namespace LoyaltyPointsExchangeSystem.Interface
 
         bool IsValidRegistration();
 
-        void RegisterUser(RegisterUser user);
+        // void RegisterUser(RegisterUser user);
+        void RegisterUser(string username, string password);
+
         Task<IEnumerable<RegisterUser>> GetAllUsersAsync();
     }
 }

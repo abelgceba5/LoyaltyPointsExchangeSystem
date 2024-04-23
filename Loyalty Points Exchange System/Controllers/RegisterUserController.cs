@@ -42,20 +42,44 @@ namespace Loyalty_Points_Exchange_System.Controllers
         //        return StatusCode(500, $"An error occurred while registering user: {ex.Message}");
         //    }
         //}
+        //[HttpPost]
+        //public IActionResult RegisterUser(RegisterUser user)
+        //{
+        //    if (!_registerUserProvider.IsValidRegistration())
+        //    {
+        //        return BadRequest(new { Success = false, Error = "Invalid registration data" });
+        //    }
+
+
+
+        //    try
+        //    {
+        //        _registerUserProvider.RegisterUser(user);
+        //        return Ok(new { Success = true, Message = "User registered successfully" });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, new { Success = false, Error = $"An error occurred while registering user: {ex.Message}" });
+        //    }
+        //}
         [HttpPost]
-        public IActionResult RegisterUser(RegisterUser user)
+        [Route("AuthenticateUsername/{username}/{password}")]
+        public IActionResult RegisterUser(string username, string password)
         {
-            if (!_registerUserProvider.IsValidRegistration())
+            // Check if the provided username and password are valid
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                return BadRequest(new { Success = false, Error = "Invalid registration data" });
+                return BadRequest(new { Success = false, Error = "Username or password cannot be empty" });
             }
 
-            // Optionally, you can perform additional validation here before saving the user
-            // For example: if (!ModelState.IsValid) { return BadRequest(ModelState); }
+            // Add any additional validation logic here if needed
 
             try
             {
-                _registerUserProvider.RegisterUser(user);
+                // Call your register user provider method passing username and password
+                _registerUserProvider.RegisterUser(username, password);
+
+
                 return Ok(new { Success = true, Message = "User registered successfully" });
             }
             catch (Exception ex)
@@ -63,6 +87,7 @@ namespace Loyalty_Points_Exchange_System.Controllers
                 return StatusCode(500, new { Success = false, Error = $"An error occurred while registering user: {ex.Message}" });
             }
         }
+
 
 
         [HttpGet]
